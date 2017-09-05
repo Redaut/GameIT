@@ -23,21 +23,21 @@ public class Color {
 		return r << 16 | g << 8 | b;
 	}
 	
-	public static int tint(int col, int d, int e, int f) {
+	public static int tint(int col, int r, int g, int b) {
 		int red = (col & 0xff0000) >> 16;
 		int green = (col & 0xff00) >> 8;
 		int blue = (col & 0xff);
 		
-		red += d;
-		green += e;
-		blue += f;
+		red += r;
+		green += g;
+		blue += b;
 		
-		if(red < 0) d = 0;
-		if(green < 0) e = 0;
-		if(blue < 0) f = 0;
-		if(red > 255) d = 255;
-		if(green > 255) e = 255;
-		if(blue > 255) f = 255;
+		if(red < 0) red = 0;
+		if(green < 0) green = 0;
+		if(blue < 0) blue = 0;
+		if(red > 255) red = 255;
+		if(green > 255) green = 255;
+		if(blue > 255) blue = 255;
 		
 		return red << 16 | green << 8 | blue;
 	}

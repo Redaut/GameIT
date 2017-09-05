@@ -2,6 +2,7 @@ package com.theRebel.ld24.graphics;
 
 import java.util.Random;
 
+import com.theRebel.ld24.entity.mob.Mob;
 import com.theRebel.ld24.level.Level;
 import com.theRebel.ld24.level.tile.Tile;
 import com.theRebel.ld24.level.tile.TorchTile;
@@ -51,7 +52,7 @@ public class Screen {
 				}
 			}
 	
-	public void renderMob(int xp, int yp, Sprite sprite, int flip) {
+	public void renderMob(int xp, int yp, Mob mob, int flip, boolean night) {
 		xp -= xOffset;
 		yp -= yOffset;
 		for(int y = 0; y < 16; y++){
@@ -67,9 +68,14 @@ public class Screen {
 				if(xt < -15 || xt >= width || yt < -16 || yt >= height) break;
 				if(xt < 0) xt = 0;
 				if(yt < 0) yt = 0;
-				int col = sprite.pixels[xs + ys * 16];
+				int col = mob.sprite.pixels[xs + ys * 16];
 				if(col != 0xffffffff){
-					col = Color.changeBrightness(col, Level.brightness);
+					if(mob.lightDist < 0){
+						col = Color.changeBrightness(col, Level.brightness);
+					}
+					else {
+						col = Color.changeBrightness(col, (int) (mob.lightDist * (Level.brightness * 0.01)));
+					}
 					pixels[xt + yt * width] = col;
 				}
 			}

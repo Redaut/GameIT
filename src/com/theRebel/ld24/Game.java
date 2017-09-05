@@ -9,11 +9,13 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
+import com.theRebel.ld24.entity.mob.Dummy;
 import com.theRebel.ld24.entity.mob.Player;
 import com.theRebel.ld24.graphics.Screen;
 import com.theRebel.ld24.graphics.SpriteSheet;
 import com.theRebel.ld24.input.InputHandler;
 import com.theRebel.ld24.level.Level;
+import com.theRebel.ld24.level.LightTile;
 
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = 1L;
@@ -47,6 +49,8 @@ public class Game extends Canvas implements Runnable{
 		input = new InputHandler();
 		player = new Player(input);
 		level.add(player);
+		for(int i = 0; i < 100; i++)
+			level.add(new Dummy());
 		addKeyListener(input);
 	}
 
@@ -119,6 +123,7 @@ public class Game extends Canvas implements Runnable{
 		int yScroll = player.y - screen.height / 2;
 		
 		level.render(xScroll, yScroll, screen);
+		LightTile.lightTiles.clear();
 		for(int i = 0; i < WIDTH * HEIGHT; i++) {
 			pixels[i] = screen.pixels[i];
 		}

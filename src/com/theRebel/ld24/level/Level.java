@@ -64,7 +64,7 @@ public class Level {
 	
 	public void update() {
 		time++;
-		if(time % 10 == 0) {
+		if(time % 100 == 0) {
 			time();
 		}
 		for(int i = 0; i < entities.size(); i++) {

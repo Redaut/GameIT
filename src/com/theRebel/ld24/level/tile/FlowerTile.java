@@ -8,4 +8,5 @@ public class FlowerTile extends Tile {
 		super(sprite);
 	}
 
+
 }

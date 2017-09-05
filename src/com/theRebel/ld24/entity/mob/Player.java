@@ -4,12 +4,14 @@ import com.theRebel.ld24.graphics.Screen;
 import com.theRebel.ld24.graphics.Sprite;
 import com.theRebel.ld24.input.InputHandler;
 import com.theRebel.ld24.level.Level;
+import com.theRebel.ld24.level.LightTile;
 
 public class Player extends Mob {
 	
 	private InputHandler input;
 	int spriteFlip = 0;
 	public boolean night = false;
+
 	
 	public Player(InputHandler input) {
 		this.input = input;
@@ -57,7 +59,11 @@ public class Player extends Mob {
 			spriteFlip = 1;
 		}
 		
-		screen.renderMob(x, y, sprite, spriteFlip);
+		screen.renderMob(x, y, this, spriteFlip, night);
+		renderLighting(LightTile.lightTiles);
+		
 	}
+	
+	
 	
 }
