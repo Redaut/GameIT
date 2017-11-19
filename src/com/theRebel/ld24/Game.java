@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
-import com.theRebel.ld24.entity.Interface;
 import com.theRebel.ld24.entity.Population;
 import com.theRebel.ld24.entity.mob.Dummy;
 import com.theRebel.ld24.entity.mob.Player;
@@ -25,7 +24,7 @@ import com.theRebel.ld24.menu.PlayMenu;
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = 1L;
 	
-	public final int WIDTH = 400;
+	public final int WIDTH = 600;
 	public final int HEIGHT = WIDTH / 16 * 10;
 	public final int SCALE = 2;
 	public final String TITLE = "My Gasddddddddddddddddddddddddssssssssme";

@@ -11,7 +11,7 @@ public class PlayMenu extends Menu {
 		// TODO Auto-generated constructor stub
 	}
 
-	String[] options = {"Forest", "Wall Mob", "Grass Mob"};
+	String[] options = {"Forest", "Ocean", "Grass Mob"};
 	int selected = 0;
 	int timer = 10;
 	public static int biome = -1;
@@ -38,11 +38,11 @@ public class PlayMenu extends Menu {
 		} else options[0] = "Forest";
 		
 		if(selected == 1) {
-			options[selected] = "> " + "Wall Mob" + " <"; 
+			options[selected] = "> " + "Ocean" + " <"; 
 			if(input.use) {
 				biome = 1;
 			}
-		} else options[1] = "Wall Mob";
+		} else options[1] = "Ocean";
 		
 		if(selected == 2) {
 			options[selected] = "> " + "Grass Mob" + " <"; 
@@ -50,6 +50,8 @@ public class PlayMenu extends Menu {
 				biome = 2;
 			}
 		} else options[2] = "Grass Mob";
+		
+		
 		
 		
 		
