@@ -33,7 +33,7 @@ public class Mob extends Entity {
 	private boolean collision(int xa, int ya) {
 		boolean solid = false;
 		for(int i = 0; i < 4; i++) {
-			int xt = ((x+xa) + (i%2*2-1) *4) >> 4;
+			int xt = ((x+xa) + (i%2*2-2) *4) >> 4;
 			int yt = ((y+ya) + (i/2*2-2) *3) >> 4;
 			
 			if(level.getTile(xt+1, yt+1).solid()) {

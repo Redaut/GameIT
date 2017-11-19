@@ -21,7 +21,7 @@ public class Level {
 	int time = 0;
 	private boolean day = false, night = false;
 	public Random random = new Random();
-	int[] grass = new int[1024 * 1024];
+	int[] grass;
 	
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<LightTile> lightTiles = new ArrayList<LightTile>();
@@ -46,6 +46,7 @@ public class Level {
 			int w = this.width = image.getWidth();
 			int h = this.height = image.getHeight();
 			tiles = new int[w * h];
+			grass = new int[w * h];
 			image.getRGB(0, 0, w, h, tiles, 0, w);
 			
 		} catch (IOException e) {
@@ -135,6 +136,7 @@ public class Level {
 		if(tiles[x+y*width] == 0xff00FFFF) return Tile.rock;
 		if(tiles[x+y*width] == 0xffffffff && grass[ x + y * width] == 0) return Tile.grassGround;
 		if(tiles[x+y*width] == 0xff007F0E) return Tile.flower;
+		if(tiles[x+y*width] == 0xff65A2FF) return Tile.water; 
 		if(tiles[x+y*width] == 0xff7F3300) return Tile.tree;
 		return Tile.voidTile;
 	}
@@ -142,6 +144,7 @@ public class Level {
 		if(x < 0 || x >= width || y < 0 || y >= height) return Tile.voidTile;
 		if(tiles[x+y*width] == 0xff7F3300) return Tile.tree;
 		if(tiles[x+y*width] == 0xffFFDE80) return Tile.torch;
+		
 		return Tile.voidTile;
 	}
 	

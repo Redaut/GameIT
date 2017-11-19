@@ -1,22 +1,31 @@
 package com.theRebel.ld24;
 
 import java.applet.Applet;
+import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 
 public class GameApplet extends Applet {
 
 	private static final long serialVersionUID = 1L;
 	
-	Game game = new Game();
+	Game g = new Game();
 	
 	public void init() {
-		setLayout(null);
+		
+		setLayout(new BorderLayout()); 
+		add(g);
 	}
 	
 	public void start() {
-		game.stop();
+		g.start();
 	}
 	
 	public void stop() {
-		game.stop();
+		g.stop();
 	}
+	
 }
+
+
+
+

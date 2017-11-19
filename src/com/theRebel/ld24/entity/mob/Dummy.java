@@ -13,7 +13,8 @@ public class Dummy extends Mob {
 	int xa, ya;
 	
 	public Dummy() {
-		x = y = 20;
+		x = random.nextInt(30*16) + 45*16;
+		y = random.nextInt(30*16) + 27*16;
 	}
 	
 	public void update() {

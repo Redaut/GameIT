@@ -16,6 +16,14 @@ public class Player extends Mob {
 	public Player(InputHandler input) {
 		this.input = input;
 		sprite = Sprite.player0;
+		x = 150;
+		y = 85;
+	}
+	
+	public Player(int x, int y, InputHandler input) {
+		this.input = input;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public void update() {

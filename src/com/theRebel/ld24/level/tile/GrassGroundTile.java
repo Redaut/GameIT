@@ -9,6 +9,4 @@ public class GrassGroundTile extends Tile {
 			super(sprite);
 	}
 	
-	
-
 }

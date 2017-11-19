@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
+import com.theRebel.ld24.entity.Interface;
+import com.theRebel.ld24.entity.Population;
 import com.theRebel.ld24.entity.mob.Dummy;
 import com.theRebel.ld24.entity.mob.Player;
 import com.theRebel.ld24.graphics.Screen;
@@ -16,6 +18,9 @@ import com.theRebel.ld24.graphics.SpriteSheet;
 import com.theRebel.ld24.input.InputHandler;
 import com.theRebel.ld24.level.Level;
 import com.theRebel.ld24.level.LightTile;
+import com.theRebel.ld24.menu.MainMenu;
+import com.theRebel.ld24.menu.Menu;
+import com.theRebel.ld24.menu.PlayMenu;
 
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = 1L;
@@ -23,7 +28,7 @@ public class Game extends Canvas implements Runnable{
 	public final int WIDTH = 400;
 	public final int HEIGHT = WIDTH / 16 * 10;
 	public final int SCALE = 2;
-	public final String TITLE = "My Game";
+	public final String TITLE = "My Gasddddddddddddddddddddddddssssssssme";
 	
 	private boolean running = false;
 	private Thread thread;
@@ -36,6 +41,8 @@ public class Game extends Canvas implements Runnable{
 	private Level level;
 	private InputHandler input;
 	private Player player;
+	public static Menu menu;
+	private Population pop ;
 	
 	public Game() {
 		Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
@@ -47,9 +54,11 @@ public class Game extends Canvas implements Runnable{
 		level = new Level("/levels/test.png");
 		new SpriteSheet("/sprites.png");
 		input = new InputHandler();
+		menu = new MainMenu(input);
+		//menu = new PlayMenu(input);
 		player = new Player(input);
-		level.add(player);
-		for(int i = 0; i < 100; i++)
+		//menulevel.add(player);
+		for(int i = 0; i < 30; i++)
 			level.add(new Dummy());
 		addKeyListener(input);
 	}
@@ -98,7 +107,7 @@ public class Game extends Canvas implements Runnable{
 			while(System.currentTimeMillis() - lastTimer > 1000) {
 				lastTimer += 1000;
 				System.out.println(updates + " ups , " + frames + " frames");
-				frame.setTitle(TITLE + " | " + updates + " ups , " + frames + " frames");
+				//frame.setTitle(TITLE + " | " + updates + " ups , " + frames + " frames");
 				frames = 0;
 				updates = 0;
 			}
@@ -108,7 +117,39 @@ public class Game extends Canvas implements Runnable{
 	int x, y;
 	public void update() {
 		input.update();
+		if(menu != null) menu.update();
+		if(pop != null) pop.update();
+	
 		level.update();
+
+		
+		if(PlayMenu.biome == 0) {
+			level = new Level("/levels/forest.png");
+			level.add(player);
+			player.x = 60*16;
+			player.y = 30*16;
+			pop = new Population(level);
+			PlayMenu.biome = -1;
+		}
+		
+		if(PlayMenu.biome == 1) {
+			level = new Level("/levels/ocean.png");
+			level.add(player);
+			player.x = 45*16;
+			player.y = 27*16;
+			pop = new Population(level);
+			PlayMenu.biome = -1;
+		}
+
+		
+		if(PlayMenu.biome == 2) {
+			level = new Level("/levels/grass.png");
+			level.add(player);
+			player.x = 60*16;
+			player.y = 30*16;
+			pop = new Population(level);
+			PlayMenu.biome = -1;
+		}
 	}
 	
 	public void render() {
@@ -118,7 +159,10 @@ public class Game extends Canvas implements Runnable{
 			return;
 		}
 		
+		Graphics g = bs.getDrawGraphics();
+		screen.graphics(g);
 		screen.clear();
+		
 		int xScroll = player.x - screen.width / 2;
 		int yScroll = player.y - screen.height / 2;
 		
@@ -128,11 +172,13 @@ public class Game extends Canvas implements Runnable{
 			pixels[i] = screen.pixels[i];
 		}
 		
-		Graphics g = bs.getDrawGraphics();
+		
 		//don't need these now
 		//g.setColor(Color.BLACK);
 		//g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		if(menu != null) menu.render(screen);
+		if(pop != null) pop.render(screen);
 		g.dispose();
 		bs.show();
 	}

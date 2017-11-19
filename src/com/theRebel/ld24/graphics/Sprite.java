@@ -15,6 +15,7 @@ public class Sprite {
 	public static Sprite rock = new Sprite(64, 0, 16);
 	public static Sprite tree = new Sprite(80, 0, 32);
 	public static Sprite torch = new Sprite(0, 16, 16);
+	public static Sprite water = new Sprite(16, 0, 16);
 	
 	public static Sprite player0 = new Sprite(0, 96, 16);
 	public static Sprite player1 = new Sprite(16, 96, 16);

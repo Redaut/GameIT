@@ -1,5 +1,8 @@
 package com.theRebel.ld24.graphics;
 
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.Random;
 
 import com.theRebel.ld24.entity.mob.Mob;
@@ -18,6 +21,7 @@ public class Screen {
 	final int TILE_SIZE = 16;
 	final Random random = new Random();
 	int[] tiles = new int[MAP_SIZE * MAP_SIZE];
+	private Graphics g;
 	
 	public Screen(int width, int height) {
 		this.height = height;
@@ -30,6 +34,10 @@ public class Screen {
 		for(int i = 0; i < pixels.length; i++){
 			pixels[i] = 0;
 		}
+	}
+	
+	public void graphics(Graphics g) {
+		this.g = g;
 	}
 	
 	public void renderTile(int xp, int yp, Tile tile) {
@@ -45,7 +53,7 @@ public class Screen {
 						int col = tile.sprite.pixels[x + y * tile.sprite.size];
 						if(col != 0xffffffff ){
 							if(!(tile instanceof TorchTile))
-						col = Color.changeBrightness(col, Level.brightness);
+						col = ExColor.changeBrightness(col, Level.brightness);
 						pixels[xt + yt * width] = col;
 						}
 					}
@@ -71,10 +79,10 @@ public class Screen {
 				int col = mob.sprite.pixels[xs + ys * 16];
 				if(col != 0xffffffff){
 					if(mob.lightDist < 0){
-						col = Color.changeBrightness(col, Level.brightness);
+						col = ExColor.changeBrightness(col, Level.brightness);
 					}
 					else {
-						col = Color.changeBrightness(col, (int) (mob.lightDist * (Level.brightness * 0.01)));
+						col = ExColor.changeBrightness(col, (int) (mob.lightDist * (Level.brightness * 0.01)));
 					}
 					pixels[xt + yt * width] = col;
 				}
@@ -99,11 +107,23 @@ public class Screen {
 				if(yt < 0) yt = 0;
 				int col = tile.sprite.pixels[xs + ys * 16];
 				if(col != 0xffffffff){
-					col = Color.tint(col, (int)(r*intensity), (int)(g*intensity), (int)(b*intensity));
+					col = ExColor.tint(col, (int)(r*intensity), (int)(g*intensity), (int)(b*intensity));
 					pixels[xt + yt * width] = col;
 				}
 			}
 		}
+	}
+	
+	public void renderText(String text, int x, int y, int size, int color) {
+		int r = (color & 0xff0000) >> 16; 
+		int g = (color & 0xff00) >> 8; 
+		int b = (color & 0xff);
+		Color c = new Color(r, g, b);
+		Font f = new Font("Verdana", 1, size);
+		
+		this.g.setColor(c);
+		this.g.setFont(f);
+		this.g.drawString(text, x, y);
 	}
 	
 	public void setOffset(int xOffset, int yOffset) {

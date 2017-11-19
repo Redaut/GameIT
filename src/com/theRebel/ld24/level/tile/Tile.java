@@ -15,6 +15,7 @@ public class Tile {
 	public static Tile rock = new RockTile(Sprite.rock);
 	public static Tile flower = new FlowerTile(Sprite.flower);
 	public static Tile tree = new TreeTile(Sprite.tree);
+	public static Tile water = new WaterTile(Sprite.water);
 	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 	public static Tile torch = new TorchTile(Sprite.torch);
 	
