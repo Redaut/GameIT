@@ -14,8 +14,8 @@ public class female extends Mob {
 	public boolean canSpawnChild = true;
 
 	public female() {
-		x = random.nextInt(30*16) + 45*16;
-		y = random.nextInt(30*16) + 27*16;
+		x = 60*16;
+		y = 30*16;
 	}
 
 	public void update() {

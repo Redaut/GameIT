@@ -28,7 +28,7 @@ public class Population extends Interface {
 	
 	public void render(Screen screen) {
 		int pop = (int) Math.floor(population);
-		screen.renderText("Population : " + pop , 500, 30, 30, 0xffffff);
+		screen.renderText("Population : " + pop , 500, 30, 30, 0, 0xffffff);
 		
 	}
 }

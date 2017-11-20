@@ -175,7 +175,7 @@ public class Level {
 
 	public void renderTimer(Screen screen) {
 		// TODO Auto-generated method stub
-		if(play) screen.renderText(timerString, 700, 700, 30, 0);
+		if(play) screen.renderText(timerString, 700, 700, 30, 0, 0);
 	}
 	
 }

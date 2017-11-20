@@ -114,13 +114,12 @@ public class Screen {
 		}
 	}
 	
-	public void renderText(String text, int x, int y, int size, int color) {
-		int r = (color & 0xff0000) >> 16; 
-		int g = (color & 0xff00) >> 8; 
+	public void renderText(String text, int x, int y, int size, int style, int color) {
+		int r = (color & 0xff0000) >> 16;
+		int g = (color & 0xff00) >> 8;
 		int b = (color & 0xff);
 		Color c = new Color(r, g, b);
-		Font f = new Font("Verdana", 1, size);
-		
+		Font f = new Font("Verdana", style, size);
 		this.g.setColor(c);
 		this.g.setFont(f);
 		this.g.drawString(text, x, y);

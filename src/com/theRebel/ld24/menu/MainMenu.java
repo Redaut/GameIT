@@ -35,10 +35,12 @@ public class MainMenu extends Menu {
 		
 		if(selected == 1) {
 			options[selected] = "> " + "Help" + " <"; 
+			if(input.use) Game.menu = new HelpMenu(input);
 		} else options[1] = "Help";
 		
 		if(selected == 2) {
 			options[selected] = "> " + "About" + " <"; 
+			if(input.use) Game.menu = new AboutMenu(input);
 		} else options[2] = "About";
 		
 		if(selected == 0 && input.use) {
@@ -49,7 +51,7 @@ public class MainMenu extends Menu {
 	
 	public void render(Screen screen) {
 		for(int i = 0; i < options.length; i++) {
-			screen.renderText(options[i], 200, 200 + i*40, 30, 0xffffff);
+			screen.renderText(options[i], 200, 200 + i*40, 30, 0, 0xffffff);
 			
 		}
 	}

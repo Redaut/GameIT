@@ -43,7 +43,7 @@ public class GameOverMenu extends Menu {
 	
 	public void render(Screen screen) {
 		for(int i = 0; i < options.length; i++) {
-			screen.renderText(options[i], 200, 200 + i*40, 30, 0xffffff);
+			screen.renderText(options[i], 200, 200 + i*40, 30, 0, 0xffffff);
 			
 		}
 	}
