@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 import com.theRebel.ld24.graphics.Screen;
 import com.theRebel.ld24.level.tile.Tile;
 import com.theRebel.ld24.level.tile.TorchTile;
+import com.theRebel.ld24.menu.GameOverMenu;
+import com.theRebel.ld24.Game;
 import com.theRebel.ld24.entity.Entity;
 
 public class Level {
@@ -22,8 +24,12 @@ public class Level {
 	private boolean day = false, night = false;
 	public Random random = new Random();
 	int[] grass;
+	public int timerm = 3;
+	public int timers = 0;
+	public String timerString = "";
+	public static boolean play = true;
 	
-	private List<Entity> entities = new ArrayList<Entity>();
+	public List<Entity> entities = new ArrayList<Entity>();
 	private List<LightTile> lightTiles = new ArrayList<LightTile>();
 	
 	public Level(int width, int height) {
@@ -146,6 +152,30 @@ public class Level {
 		if(tiles[x+y*width] == 0xffFFDE80) return Tile.torch;
 		
 		return Tile.voidTile;
+	}
+
+	public void updateTimer() {
+		
+		
+		timerString = timerm + ":" + timers;
+		if (timers == 0 && timerm != 0) timerString = timerm + ":" + 0 + "0";
+		if (timers < 10) timerString = timerm + ":" + "0" + timers;
+		if (timers <= 0 && timerm != 0) {
+			timers = 60;
+			timerm--;
+		}
+
+		timers--;
+		if (timers <= 0 && timerm <= 0 && play) {
+			play = false;
+			Game.menu = new GameOverMenu(Game.input);
+		}
+		
+	}
+
+	public void renderTimer(Screen screen) {
+		// TODO Auto-generated method stub
+		if(play) screen.renderText(timerString, 700, 700, 30, 0);
 	}
 	
 }

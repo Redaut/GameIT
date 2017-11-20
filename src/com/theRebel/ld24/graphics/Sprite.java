@@ -24,6 +24,13 @@ public class Sprite {
 	public static Sprite player4 = new Sprite(64, 96, 16);
 	public static Sprite player5 = new Sprite(80, 96, 16);
 	
+	public static Sprite female0 = new Sprite(96, 96, 16);
+	public static Sprite female1 = new Sprite(112, 96, 16);
+	public static Sprite female2 = new Sprite(128, 96, 16);
+	public static Sprite female3 = new Sprite(144, 96, 16);
+	public static Sprite female4 = new Sprite(160, 96, 16);
+	public static Sprite female5 = new Sprite(176, 96, 16);
+	
 	public static Sprite voidSprite = new Sprite(0);
 	
 	

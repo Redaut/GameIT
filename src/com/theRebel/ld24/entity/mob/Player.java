@@ -1,5 +1,8 @@
 package com.theRebel.ld24.entity.mob;
 
+import java.util.Random;
+
+import com.theRebel.ld24.entity.Entity;
 import com.theRebel.ld24.graphics.Screen;
 import com.theRebel.ld24.graphics.Sprite;
 import com.theRebel.ld24.input.InputHandler;
@@ -11,6 +14,7 @@ public class Player extends Mob {
 	private InputHandler input;
 	int spriteFlip = 0;
 	public boolean night = false;
+	Random random = new Random();
 
 	
 	public Player(InputHandler input) {
@@ -43,6 +47,22 @@ public class Player extends Mob {
 		if(xa != 0 || ya != 0){
 			move(xa, ya);
 		}
+		
+		for(int i = 0; i < level.entities.size(); i++) {
+			Entity e = level.entities.get(i);
+			if(e instanceof female) {
+				if(((x >> 4) == (e.x >> 4)) && ((y >> 4) == (e.y << 4)) && ((female) e).canSpawnChild) {
+
+					for (int c = 0; c < random.nextInt(4) + 1; c++)  {
+						Entity m = new ForestMob();
+					m.x = x;
+					m.y = y;
+					level.add(m);
+					//((female) e).canSpawnChild = false;
+					}
+				}
+			}
+		}
 	}
 	
 	public void render(Screen screen) {
@@ -67,7 +87,7 @@ public class Player extends Mob {
 			spriteFlip = 1;
 		}
 		
-		screen.renderMob(x, y, this, spriteFlip, night);
+		screen.renderMob(x, y, this, spriteFlip, false);
 		renderLighting(LightTile.lightTiles);
 		
 	}

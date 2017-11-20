@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import com.theRebel.ld24.entity.Population;
 import com.theRebel.ld24.entity.mob.Dummy;
 import com.theRebel.ld24.entity.mob.Player;
+import com.theRebel.ld24.entity.mob.female;
 import com.theRebel.ld24.graphics.Screen;
 import com.theRebel.ld24.graphics.SpriteSheet;
 import com.theRebel.ld24.input.InputHandler;
@@ -38,7 +39,7 @@ public class Game extends Canvas implements Runnable{
 	//screen is imported through the import keyword and now declared
 	private Screen screen;
 	private Level level;
-	private InputHandler input;
+	public static InputHandler input;
 	private Player player;
 	public static Menu menu;
 	private Population pop ;
@@ -107,6 +108,7 @@ public class Game extends Canvas implements Runnable{
 				lastTimer += 1000;
 				System.out.println(updates + " ups , " + frames + " frames");
 				//frame.setTitle(TITLE + " | " + updates + " ups , " + frames + " frames");
+				level.updateTimer();
 				frames = 0;
 				updates = 0;
 			}
@@ -124,7 +126,11 @@ public class Game extends Canvas implements Runnable{
 		
 		if(PlayMenu.biome == 0) {
 			level = new Level("/levels/forest.png");
+			female f = new female();
 			level.add(player);
+			level.add(f);
+			f.x = 65*16;
+			f.y = 35*16;
 			player.x = 60*16;
 			player.y = 30*16;
 			pop = new Population(level);
@@ -134,6 +140,7 @@ public class Game extends Canvas implements Runnable{
 		if(PlayMenu.biome == 1) {
 			level = new Level("/levels/ocean.png");
 			level.add(player);
+			
 			player.x = 45*16;
 			player.y = 27*16;
 			pop = new Population(level);
@@ -178,6 +185,7 @@ public class Game extends Canvas implements Runnable{
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		if(menu != null) menu.render(screen);
 		if(pop != null) pop.render(screen);
+		level.renderTimer(screen);
 		g.dispose();
 		bs.show();
 	}

@@ -8,6 +8,7 @@ public class Entity {
 	public int x, y;
 	public boolean removed = false;
 	protected Level level;
+	public int health = 100;
 	
 	public void update() {
 		
